@@ -20,6 +20,17 @@ class _LoginFormState extends State<LoginForm> {
   bool _cargando = false;
 
   Future iniciar() async {
+    if (_correoElectronico.text.trim().isEmpty ||
+        _contrasenia.text.trim().isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Todos los campos son obligatorios")),
+        );
+      }
+
+      return;
+    }
+
     setState(() => _cargando = true);
 
     try {
@@ -35,7 +46,11 @@ class _LoginFormState extends State<LoginForm> {
         );
       }
     } on AuthException catch (e) {
-      print(e);
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      }
     } finally {
       if (mounted) setState(() => _cargando = false);
     }
