@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:n3ds_taller/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
@@ -25,8 +27,15 @@ class AuthService {
     );
   }
 
-  Future<void> cerrarSesion() async {
+  Future<void> cerrarSesion(BuildContext context) async {
     await _supabase.auth.signOut();
+
+    if (context.mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
   }
 
   User? get usuario => _supabase.auth.currentUser;

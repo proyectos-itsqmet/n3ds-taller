@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:n3ds_taller/models/destino.dart';
+import 'package:n3ds_taller/screens/destino_detalle_screen.dart';
 import 'package:n3ds_taller/services/destino_service.dart';
 
 class DestinosScreens extends StatefulWidget {
@@ -31,7 +32,7 @@ class _DestinosScreensState extends State<DestinosScreens> {
           }
 
           if (snapshot.hasError) {
-            Center(child: Text("Error al cargar los datos"));
+            return Center(child: Text("Error al cargar los datos"));
           }
 
           final destinos = snapshot.data ?? [];
@@ -55,7 +56,12 @@ class _DestinosScreensState extends State<DestinosScreens> {
                 title: Text(item.destino),
                 subtitle: Text('${item.pais} - ${item.ciudad}'),
                 trailing: IconButton.outlined(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DestinoDetalleScreen(destino: item),
+                    ),
+                  ),
                   icon: Icon(Icons.chevron_right),
                 ),
               );
