@@ -1,3 +1,1 @@
-# n3ds_taller
-
-A new Flutter project.
+# Nucleo 3 Desarrollo de software - Taller practico
