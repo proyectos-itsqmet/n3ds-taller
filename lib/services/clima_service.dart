@@ -10,7 +10,7 @@ class ClimaService {
     required String lat,
   }) async {
     final url =
-        "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=${AppEnv.weatherKey}";
+        "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=${AppEnv.weatherKey}&units=metric&lang=es";
 
     final response = await _dio.get(url);
 

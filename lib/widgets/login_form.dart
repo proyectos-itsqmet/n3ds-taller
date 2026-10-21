@@ -15,6 +15,8 @@ class _LoginFormState extends State<LoginForm> {
   final _correoElectronico = TextEditingController();
   final _contrasenia = TextEditingController();
 
+  bool obscureText = true;
+
   bool _cargando = false;
 
   Future iniciar() async {
@@ -73,12 +75,21 @@ class _LoginFormState extends State<LoginForm> {
         Text("Contaseña", style: Theme.of(context).textTheme.labelSmall),
         SizedBox(height: 8),
         TextFormField(
+          obscureText: obscureText,
           controller: _contrasenia,
           decoration: InputDecoration(
             hintText: "Contraseña",
             border: OutlineInputBorder(
               borderSide: BorderSide(),
               borderRadius: BorderRadius.circular(12),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () => setState(() => obscureText = !obscureText),
+              icon: Icon(
+                obscureText
+                    ? Icons.remove_red_eye
+                    : Icons.remove_red_eye_outlined,
+              ),
             ),
           ),
         ),
